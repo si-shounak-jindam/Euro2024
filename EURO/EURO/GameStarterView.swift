@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct GameStarterView: View {
+    @State private var showGroupSelector: Bool = false
     var body: some View {
         ZStack {
             FANTASYTheme.getColor(named: .CFSDKPrimary3)
@@ -22,12 +23,14 @@ struct GameStarterView: View {
                 
                 
                 RoundedButton(title: "Play Now", backgroundColor: .cfsdkAccent1, foregroundColor: .cfsdkNeutral) {
-                    
+                    showGroupSelector = true
                 }
                 .padding(40)
             }
-            
         }
+        .fullScreenCover(isPresented: $showGroupSelector, content: {
+            GroupSelector()
+        })
     }
 }
 
