@@ -37,6 +37,7 @@ struct ThirdPlaceView: View {
                 .CFSDKcornerRadius(15, corners: [.bottomLeft,.bottomRight])
             if selectedTeams.count < 4 {
                 Text("You still need to predict 4 best 3rd-placed teams")
+                    .font(.subheadline)
                     .foregroundStyle(.gray)
                     .padding(.top, 20)
             }

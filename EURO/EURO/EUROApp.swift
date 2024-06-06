@@ -11,7 +11,7 @@ import SwiftUI
 struct EUROApp: App {
     var body: some Scene {
         WindowGroup {
-            GameStarterView()
+            ContentView()
         }
     }
 }

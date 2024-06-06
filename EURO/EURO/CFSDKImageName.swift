@@ -20,6 +20,9 @@ enum CFSDKImageName: String {
     case onboarding1
     case onboarding2
     case onboarding3
+    case BackChev
+    case threeLines
+    case VisitQatar
     
     var name: String { self.rawValue }
 }
