@@ -17,9 +17,9 @@ struct ThirdPlaceView: View {
         ("Switzerland", "Group A", "ENG"),
         ("Finland", "Group B", "ESP"),
         ("Ukraine", "Group C", "ESP"),
-        ("Czechia", "Group D", "ESP"),
+        ("Czechia", "Group D", "GER"),
         ("Slovakia", "Group E", "ENG"),
-        ("Portugal", "Group F", "ENG")
+        ("Portugal", "Group F", "FRA")
     ]
     
     var body: some View {

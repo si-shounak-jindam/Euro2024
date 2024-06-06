@@ -28,7 +28,6 @@ struct GroupSelector: View {
     @State private var showBottomSheet: Bool = false
     @State private var showScoreSheet: Bool = false
     
-    
     @State private var countries: [Country] = [
         Country(name: "", imageName: ""),
         Country(name: "", imageName: ""),
@@ -69,12 +68,22 @@ struct GroupSelector: View {
     
     var body: some View {
         VStack(spacing: 0) {
-            headerView
-                .padding()
-                .background {
-                    FANTASYTheme.getColor(named: .CFSDKSecondary)
-                }
+            if countries.filter({ !$0.name.isEmpty }).count == 4 {
+                successHeaderView
+                    .padding(.horizontal, 0)
+                    .background {
+                        FANTASYTheme.getColor(named: .groupHeaderBlue)
+                    }
+            } else {
+                headerView
+                    .padding(.vertical, 16)
+                    .padding(.horizontal, 0)
+                    .background {
+                        FANTASYTheme.getColor(named: .groupHeaderBlue)
+                    }
+            }
             emptyGroup
+                .padding(.top, 0)
         }
         .environment(\.editMode, $editMode)
     }
@@ -82,13 +91,14 @@ struct GroupSelector: View {
     //MARK: - VIEWS
     
     var headerView: some View {
-        VStack {
+        VStack(spacing: 0) {
             HStack {
-                Text("       ")
                 Text("Group A")
                     .foregroundStyle(.cfsdkAccent1)
                 Spacer()
             }
+            .padding(.bottom, 10)
+            .padding(.horizontal, 40)
             HStack(spacing: 50) {
                 ForEach(allTeams.indices, id: \.self) { index in
                     VStack {
@@ -99,6 +109,9 @@ struct GroupSelector: View {
                                 Image(systemName: "circle.fill")
                             } else {
                                 Image(allTeams[index].imageName)
+                                    .resizable()
+                                    .frame(width: 36, height: 36)
+                                    .clipShape(Circle())
                             }
                         })
                         Text(allTeams[index].name.prefix(3).uppercased())
@@ -110,6 +123,26 @@ struct GroupSelector: View {
         }
     }
     
+    var successHeaderView: some View {
+        HStack {
+            VStack(spacing: 0) {
+                HStack {
+                    Text("Group A")
+                        .foregroundStyle(.cfsdkAccent1)
+                    Spacer()
+                }
+                .padding(.bottom, 10)
+                .padding(.horizontal, 40)
+                Text("Drag teams to re-order")
+                    .foregroundStyle(.cfsdkWhite)
+            }
+            FANTASYTheme.getImage(named: .Pattern)?
+                .resizable()
+                .scaledToFit()
+                .frame(width: 150, height: 100)
+        }
+    }
+    
     var emptyGroup: some View {
         List {
             ForEach(countries.indices, id: \.self) { index in
@@ -117,6 +150,9 @@ struct GroupSelector: View {
                     Text("\(index + 1)")
                         .foregroundStyle(.cfsdkWhite)
                     Image(countries[index].imageName)
+                        .resizable()
+                        .frame(width: 25, height: 25)
+                        .clipShape(Circle())
                     Text(countries[index].name)
                         .foregroundStyle(.cfsdkWhite)
                     
@@ -131,8 +167,8 @@ struct GroupSelector: View {
             }
             .listRowBackground(FANTASYTheme.getColor(named: .CFSDKPrimary3))
         }
-        
         .environment(\.editMode, .constant(countries.contains(where: { !$0.name.isEmpty }) ? EditMode.active : EditMode.inactive))
+        .listStyle(PlainListStyle())
     }
     
     func move(indices: IndexSet, newOffset: Int) {
@@ -299,8 +335,6 @@ struct GroupSelector: View {
         .ignoresSafeArea()
     }
 }
-
-
 
 
 struct GroupSelector_Previews: PreviewProvider {

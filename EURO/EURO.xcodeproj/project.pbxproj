@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		926469232C109C5800C2926B /* ThirdPlaceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 926469222C109C5800C2926B /* ThirdPlaceView.swift */; };
+		926469252C11901600C2926B /* GroupStages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 926469242C11901600C2926B /* GroupStages.swift */; };
 		92A99F7B2C0DD2A4005CA5C2 /* EUROApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92A99F7A2C0DD2A4005CA5C2 /* EUROApp.swift */; };
 		92A99F7D2C0DD2A4005CA5C2 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92A99F7C2C0DD2A4005CA5C2 /* ContentView.swift */; };
 		92A99F7F2C0DD2A5005CA5C2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 92A99F7E2C0DD2A5005CA5C2 /* Assets.xcassets */; };
@@ -55,6 +56,7 @@
 
 /* Begin PBXFileReference section */
 		926469222C109C5800C2926B /* ThirdPlaceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThirdPlaceView.swift; sourceTree = "<group>"; };
+		926469242C11901600C2926B /* GroupStages.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupStages.swift; sourceTree = "<group>"; };
 		92A99F772C0DD2A4005CA5C2 /* EURO.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EURO.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		92A99F7A2C0DD2A4005CA5C2 /* EUROApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EUROApp.swift; sourceTree = "<group>"; };
 		92A99F7C2C0DD2A4005CA5C2 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -200,6 +202,7 @@
 			isa = PBXGroup;
 			children = (
 				92A99FB42C0DD699005CA5C2 /* GroupSelector.swift */,
+				926469242C11901600C2926B /* GroupStages.swift */,
 				926469222C109C5800C2926B /* ThirdPlaceView.swift */,
 			);
 			path = GroupStages;
@@ -376,6 +379,7 @@
 				92A99FCD2C0F0717005CA5C2 /* Encodable+Ext.swift in Sources */,
 				92A99F7D2C0DD2A4005CA5C2 /* ContentView.swift in Sources */,
 				92A99FCF2C0F0717005CA5C2 /* URLRequest+Ext.swift in Sources */,
+				926469252C11901600C2926B /* GroupStages.swift in Sources */,
 				92A99FB72C0DD7BB005CA5C2 /* FantasyTheme.swift in Sources */,
 				92A99F7B2C0DD2A4005CA5C2 /* EUROApp.swift in Sources */,
 				926469232C109C5800C2926B /* ThirdPlaceView.swift in Sources */,

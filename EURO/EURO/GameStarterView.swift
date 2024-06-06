@@ -29,7 +29,7 @@ struct GameStarterView: View {
             }
         }
         .fullScreenCover(isPresented: $showGroupSelector, content: {
-            GroupSelector()
+            GroupStages()
         })
     }
 }
