@@ -12,6 +12,7 @@ struct ThirdPlaceView: View {
     @State private var selectedTeams: Set<String> = []
     
     @State private var showKnockoutSheet: Bool = false
+    
     @Binding var progress: Double
     
     let teams = [
@@ -64,6 +65,7 @@ struct ThirdPlaceView: View {
             Text("Predict the four best third-placed teams")
                 .font(.title3)
                 .foregroundStyle(.cfsdkWhite)
+                .fixedSize(horizontal: true, vertical: false)
             Text("The four with the most points will progress to the knockout stage")
                 .font(.subheadline)
                 .foregroundStyle(.cfsdkWhite)
@@ -118,7 +120,7 @@ struct ThirdPlaceView: View {
                 Text("Now Lets move on the Knockout Stage!")
                     .foregroundColor(.cfsdkWhite)
                 Button(action: {
-                    
+                    showKnockoutSheet = true
                 }, label: {
                     Text("Continue")
                         .foregroundStyle(.cfsdkNeutral)
@@ -132,6 +134,9 @@ struct ThirdPlaceView: View {
             }
         }
         .ignoresSafeArea()
+        .fullScreenCover(isPresented: $showKnockoutSheet, content: {
+            KnockoutStages()
+        })
     }
 }
 
