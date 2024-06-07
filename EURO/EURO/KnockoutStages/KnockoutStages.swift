@@ -15,12 +15,13 @@ struct KnockoutStages: View {
     
     var body: some View {
         ZStack {
-            Color.blue.opacity(0.5)
+            FANTASYTheme.getColor(named: .groupSheetBlue)
                 .ignoresSafeArea()
             ScrollView([.horizontal, .vertical]) {
                 HStack {
                     VStack {
                         Text("Round of 16")
+                            .foregroundStyle(.cfsdkWhite)
                             .font(.largeTitle)
                             .padding()
                         ForEach(0..<8, id: \.self) { index in
@@ -111,8 +112,7 @@ struct KnockoutStages: View {
                         moveToNextRound(selectedTeam: firstTeam, round: round, matchIndex: matchIndex, selectedTeams: selectedTeams)
                     }) {
                         HStack {
-                        Image(systemName: "heart.fill")
-                                .accentColor(.black)
+                            FANTASYTheme.getImage(named: .FRA)
                         Text(firstTeam.rawValue)
                                 .foregroundStyle(.black)
                         Spacer()
@@ -129,8 +129,7 @@ struct KnockoutStages: View {
                                 moveToNextRound(selectedTeam: secondTeam, round: round, matchIndex: matchIndex, selectedTeams: selectedTeams)
                             }) {
                                 HStack {
-                                Image(systemName: "heart.fill")
-                                        .accentColor(.black)
+                                    FANTASYTheme.getImage(named: .ENG)
                                 Text(secondTeam.rawValue)
                                         .foregroundStyle(.black)
                                 Spacer()

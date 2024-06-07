@@ -12,6 +12,7 @@ struct ThirdPlaceView: View {
     @State private var selectedTeams: Set<String> = []
     
     @State private var showKnockoutSheet: Bool = false
+    @Binding var progress: Double
     
     let teams = [
         ("Switzerland", "Group A", "ENG"),
@@ -80,6 +81,11 @@ struct ThirdPlaceView: View {
                         } else if selectedTeams.count < 4 {
                             selectedTeams.insert(team.0)
                         }
+                        if progress < 1.0 {
+                            withAnimation {
+                                progress += 1/28
+                            }
+                        }
                     }) {
                         Image(systemName: selectedTeams.contains(team.0) ? "circle.fill" : "circle")
                             .foregroundColor(.white)
@@ -129,6 +135,3 @@ struct ThirdPlaceView: View {
     }
 }
 
-#Preview {
-    ThirdPlaceView()
-}

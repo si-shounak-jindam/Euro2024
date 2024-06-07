@@ -7,21 +7,13 @@
 
 import SwiftUI
 
-struct Country: Identifiable, Equatable {
-    let id = UUID()
-    let name: String
-    let imageName: String
-    var isSelected = false
-}
 
-struct ScoreSheetModel: Identifiable, Equatable {
-    let id = UUID()
-    let name: String
-    let description: String
-    let points: String
-}
+
+
 
 struct GroupSelector: View {
+    
+    @Binding var progress: Double
     
     @Environment(\.presentationMode) var presentationMode
     
@@ -104,6 +96,11 @@ struct GroupSelector: View {
                     VStack {
                         Button(action: {
                             addCountryIfNeeded(allTeams[index])
+                            if progress < 1.0 {
+                                withAnimation {
+                                    progress += 1/28
+                                }
+                            }
                         }, label: {
                             if allTeams[index].isSelected {
                                 Image(systemName: "circle.fill")
@@ -340,8 +337,8 @@ struct GroupSelector: View {
 }
 
 
-struct GroupSelector_Previews: PreviewProvider {
-    static var previews: some View {
-        GroupSelector()
-    }
-}
+//struct GroupSelector_Previews: PreviewProvider {
+//    static var previews: some View {
+//        GroupSelector(progress: $progress)
+//    }
+//}

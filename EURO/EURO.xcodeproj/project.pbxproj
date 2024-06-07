@@ -10,6 +10,9 @@
 		926469232C109C5800C2926B /* ThirdPlaceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 926469222C109C5800C2926B /* ThirdPlaceView.swift */; };
 		926469252C11901600C2926B /* GroupStages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 926469242C11901600C2926B /* GroupStages.swift */; };
 		9264692A2C11DC1700C2926B /* CFSDKColorName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 926469292C11DC1700C2926B /* CFSDKColorName.swift */; };
+		9264692F2C130EFF00C2926B /* ScoreSheetModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9264692E2C130EFF00C2926B /* ScoreSheetModel.swift */; };
+		926469312C130F4200C2926B /* CountryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 926469302C130F4200C2926B /* CountryModel.swift */; };
+		926469332C1318B900C2926B /* KnockoutBracket.swift in Sources */ = {isa = PBXBuildFile; fileRef = 926469322C1318B900C2926B /* KnockoutBracket.swift */; };
 		92A99F7B2C0DD2A4005CA5C2 /* EUROApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92A99F7A2C0DD2A4005CA5C2 /* EUROApp.swift */; };
 		92A99F7D2C0DD2A4005CA5C2 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92A99F7C2C0DD2A4005CA5C2 /* ContentView.swift */; };
 		92A99F7F2C0DD2A5005CA5C2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 92A99F7E2C0DD2A5005CA5C2 /* Assets.xcassets */; };
@@ -58,6 +61,9 @@
 		926469222C109C5800C2926B /* ThirdPlaceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThirdPlaceView.swift; sourceTree = "<group>"; };
 		926469242C11901600C2926B /* GroupStages.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupStages.swift; sourceTree = "<group>"; };
 		926469292C11DC1700C2926B /* CFSDKColorName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CFSDKColorName.swift; path = GroupStages/CFSDKColorName.swift; sourceTree = "<group>"; };
+		9264692E2C130EFF00C2926B /* ScoreSheetModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoreSheetModel.swift; sourceTree = "<group>"; };
+		926469302C130F4200C2926B /* CountryModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountryModel.swift; sourceTree = "<group>"; };
+		926469322C1318B900C2926B /* KnockoutBracket.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KnockoutBracket.swift; sourceTree = "<group>"; };
 		92A99F772C0DD2A4005CA5C2 /* EURO.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EURO.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		92A99F7A2C0DD2A4005CA5C2 /* EUROApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EUROApp.swift; sourceTree = "<group>"; };
 		92A99F7C2C0DD2A4005CA5C2 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -204,6 +210,8 @@
 				92A99FB42C0DD699005CA5C2 /* GroupSelector.swift */,
 				926469242C11901600C2926B /* GroupStages.swift */,
 				926469222C109C5800C2926B /* ThirdPlaceView.swift */,
+				9264692E2C130EFF00C2926B /* ScoreSheetModel.swift */,
+				926469302C130F4200C2926B /* CountryModel.swift */,
 			);
 			path = GroupStages;
 			sourceTree = "<group>";
@@ -212,6 +220,7 @@
 			isa = PBXGroup;
 			children = (
 				92A99FB92C0EF63F005CA5C2 /* KnockoutStages.swift */,
+				926469322C1318B900C2926B /* KnockoutBracket.swift */,
 			);
 			path = KnockoutStages;
 			sourceTree = "<group>";
@@ -363,9 +372,11 @@
 			files = (
 				92A99FCA2C0F0717005CA5C2 /* CFSDKDouble+Ext.swift in Sources */,
 				92A99FBD2C0EFD03005CA5C2 /* GameStarterView.swift in Sources */,
+				926469312C130F4200C2926B /* CountryModel.swift in Sources */,
 				92A99FD02C0F0717005CA5C2 /* View+Extension.swift in Sources */,
 				92A99FB12C0DD4E4005CA5C2 /* CFSDKImageName.swift in Sources */,
 				92A99FCC2C0F0717005CA5C2 /* Date+Ext.swift in Sources */,
+				9264692F2C130EFF00C2926B /* ScoreSheetModel.swift in Sources */,
 				92A99FBA2C0EF63F005CA5C2 /* KnockoutStages.swift in Sources */,
 				92A99FAA2C0DD46A005CA5C2 /* RoundedCorner.swift in Sources */,
 				92A99FA92C0DD46A005CA5C2 /* PlayerCardLeadingBackground.swift in Sources */,
@@ -374,6 +385,7 @@
 				92A99FBF2C0F0630005CA5C2 /* RoundedButton.swift in Sources */,
 				92A99FC12C0F06E3005CA5C2 /* CFSDKCustomFonts.swift in Sources */,
 				92A99FCE2C0F0717005CA5C2 /* Task+Ext.swift in Sources */,
+				926469332C1318B900C2926B /* KnockoutBracket.swift in Sources */,
 				92A99FAC2C0DD495005CA5C2 /* CachedImageView.swift in Sources */,
 				92A99FCD2C0F0717005CA5C2 /* Encodable+Ext.swift in Sources */,
 				92A99F7D2C0DD2A4005CA5C2 /* ContentView.swift in Sources */,
