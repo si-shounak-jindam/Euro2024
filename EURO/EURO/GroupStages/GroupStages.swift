@@ -29,10 +29,10 @@ struct GroupStages: View {
         ScrollView {
             VStack {
                 ForEach(0..<6) { index in
-                    GroupSelector(progress: $progress)
+                    GroupSelector(viewModel: GroupSelectorViewModel(progress: progress), progress: $progress)
                         .CFSDKcornerRadius(15, corners: .allCorners)
                         .frame(height: 350)
-                        .padding()
+                        .padding(.all, 30)
                 }
                 ThirdPlaceView(progress: $progress)
                     .padding()
@@ -79,24 +79,7 @@ struct GroupStages: View {
     }
 }
 
-struct ProgressBar: View {
-    @Binding var progress: Double
-    
-    var body: some View {
-        ZStack(alignment: .leading) {
-            Rectangle()
-                .frame(height: 5)
-                .foregroundColor(Color.gray.opacity(0.3))
-                .cornerRadius(10)
-            
-            Rectangle()
-                .frame(width: CGFloat(progress) * UIScreen.main.bounds.width * 0.8, height: 5)
-                .foregroundColor(.cfsdkAccent1)
-                .cornerRadius(10)
-        }
-        .padding()
-    }
-}
+
 
 #Preview {
     GroupStages()
