@@ -14,6 +14,7 @@ import SwiftUI
 struct GroupSelector: View {
     
     @Binding var progress: Double
+    @Binding var groupName: String
     
     @Environment(\.presentationMode) var presentationMode
     
@@ -26,6 +27,7 @@ struct GroupSelector: View {
         Country(name: "", imageName: ""),
         Country(name: "", imageName: "")
     ]
+    
     
     @State private var scoreSheetDetail: [ScoreSheetModel] = [
         ScoreSheetModel(name: "Group Stage",
@@ -85,7 +87,7 @@ struct GroupSelector: View {
     var headerView: some View {
         VStack(spacing: 0) {
             HStack {
-                Text("Group A")
+                Text("Group " + "\(groupName)")
                     .foregroundStyle(.cfsdkAccent1)
                 Spacer()
             }
@@ -124,7 +126,7 @@ struct GroupSelector: View {
         HStack {
             VStack(spacing: 0) {
                 HStack {
-                    Text("Group A")
+                    Text("Group " + "\(groupName)")
                         .foregroundStyle(.cfsdkAccent1)
                     Spacer()
                 }

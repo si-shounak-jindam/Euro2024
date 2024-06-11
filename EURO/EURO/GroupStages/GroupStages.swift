@@ -2,13 +2,16 @@
 //  GroupStages.swift
 //  EURO
 //
-//  Created by Shounak Jindam on 06/06/24.
+//  Created by Shounak Jindam on 06/06/24.@
 //
 
 import SwiftUI
 
 struct GroupStages: View {
     @State private var progress: Double = 0.0
+    
+    @State private var groupName: [String] = ["A", "B", "C", "D", "E", "F"]
+    
     var body: some View {
         ZStack {
             FANTASYTheme.getColor(named: .CFSDKPrimary)
@@ -28,8 +31,8 @@ struct GroupStages: View {
     var groups: some View {
         ScrollView {
             VStack {
-                ForEach(0..<6) { index in
-                    GroupSelector(progress: $progress)
+                ForEach(groupName.indices) { index in
+                    GroupSelector(progress: $progress, groupName: $groupName[index])
                         .CFSDKcornerRadius(15, corners: .allCorners)
                         .frame(height: 350)
                         .padding()
