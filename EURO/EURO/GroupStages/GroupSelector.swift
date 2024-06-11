@@ -7,10 +7,6 @@
 
 import SwiftUI
 
-
-
-
-
 struct GroupSelector: View {
     
     @Binding var progress: Double
@@ -60,9 +56,11 @@ struct GroupSelector: View {
         Country(name: "France", imageName: "FRA")
     ]
     
+    @ObservedObject var viewModel: GroupSelectorViewModel
+
     var body: some View {
         VStack(spacing: 0) {
-            if countries.filter({ !$0.name.isEmpty }).count == 4 {
+            if viewModel.countries.filter({ !$0.name.isEmpty }).count == 4 {
                 successHeaderView
                     .padding(.horizontal, 0)
                     .background {
@@ -79,11 +77,11 @@ struct GroupSelector: View {
             emptyGroup
                 .padding(.top, 0)
         }
-        .environment(\.editMode, $editMode)
+        .environment(\.editMode, $viewModel.editMode)
     }
-    
+
     //MARK: - VIEWS
-    
+
     var headerView: some View {
         VStack(spacing: 0) {
             HStack {
@@ -94,34 +92,29 @@ struct GroupSelector: View {
             .padding(.bottom, 10)
             .padding(.horizontal, 40)
             HStack(spacing: 50) {
-                ForEach(allTeams.indices, id: \.self) { index in
+                ForEach(viewModel.allTeams.indices, id: \.self) { index in
                     VStack {
                         Button(action: {
-                            addCountryIfNeeded(allTeams[index])
-                            if progress < 1.0 {
-                                withAnimation {
-                                    progress += 1/28
-                                }
-                            }
+                            viewModel.addCountryIfNeeded(viewModel.allTeams[index])
                         }, label: {
-                            if allTeams[index].isSelected {
+                            if viewModel.allTeams[index].isSelected {
                                 Image(systemName: "circle.fill")
                             } else {
-                                Image(allTeams[index].imageName)
+                                Image(viewModel.allTeams[index].imageName)
                                     .resizable()
                                     .frame(width: 36, height: 36)
                                     .clipShape(Circle())
                             }
                         })
-                        Text(allTeams[index].name.prefix(3).uppercased())
+                        Text(viewModel.allTeams[index].name.prefix(3).uppercased())
                             .foregroundStyle(.cfsdkWhite)
                     }
-                    .disabled(allTeams[index].isSelected)
+                    .disabled(viewModel.allTeams[index].isSelected)
                 }
             }
         }
     }
-    
+
     var successHeaderView: some View {
         HStack {
             VStack(spacing: 0) {
@@ -141,23 +134,22 @@ struct GroupSelector: View {
                 .frame(width: 150, height: 100)
         }
     }
-    
+
     var emptyGroup: some View {
         List {
-            ForEach(countries.indices, id: \.self) { index in
+            ForEach(viewModel.countries.indices, id: \.self) { index in
                 HStack {
                     Text("\(index + 1)")
                         .foregroundStyle(.cfsdkWhite)
-                    Image(countries[index].imageName)
+                    Image(viewModel.countries[index].imageName)
                         .resizable()
                         .frame(width: 25, height: 25)
                         .clipShape(Circle())
-                    Text(countries[index].name)
+                    Text(viewModel.countries[index].name)
                         .foregroundStyle(.cfsdkWhite)
-                    
                 }
             }
-            .onMove(perform: move)
+            .onMove(perform: viewModel.move)
             .listRowBackground(FANTASYTheme.getColor(named: .CFSDKPrimary3))
             HStack {
                 Spacer()
@@ -166,33 +158,18 @@ struct GroupSelector: View {
             }
             .listRowBackground(FANTASYTheme.getColor(named: .CFSDKPrimary3))
         }
-        .environment(\.editMode, .constant(countries.contains(where: { !$0.name.isEmpty }) ? EditMode.active : EditMode.inactive))
+        .environment(\.editMode, .constant(viewModel.countries.contains(where: { !$0.name.isEmpty }) ? EditMode.active : EditMode.inactive))
         .listStyle(PlainListStyle())
     }
-    
-    func move(indices: IndexSet, newOffset: Int) {
-        countries.move(fromOffsets: indices, toOffset: newOffset)
-    }
-    
-    func addCountryIfNeeded(_ country: Country) {
-        if let index = countries.firstIndex(where: { $0.name.isEmpty && !$0.isSelected }) {
-            countries[index] = country
-            countries[index].isSelected = true
-            
-            if let teamIndex = allTeams.firstIndex(of: country) {
-                allTeams[teamIndex].isSelected = true
-            }
-        }
-    }
-    
+
     var viewGroupDetailButton: some View {
         Button(action: {
-            showBottomSheet.toggle()
+            viewModel.showBottomSheet.toggle()
         }, label: {
             Text("View Group A details")
                 .foregroundStyle(.cfsdkAccent1)
         })
-        .sheet(isPresented: $showBottomSheet, content: {
+        .sheet(isPresented: $viewModel.showBottomSheet, content: {
             bottomSheet
                 .presentationCornerRadius(20)
                 .presentationDetents([.fraction(0.55)])
@@ -202,8 +179,7 @@ struct GroupSelector: View {
                 }
         })
     }
-    
-    
+
     var bottomSheet: some View {
         ZStack {
             FANTASYTheme.getColor(named: .groupSheetBlue)
@@ -215,7 +191,7 @@ struct GroupSelector: View {
                         .padding([.top, .leading], 10)
                     Spacer()
                     Button(action: {
-                        showBottomSheet = false
+                        viewModel.showBottomSheet = false
                     }, label: {
                         Image(systemName: "xmark")
                             .tint(.cfsdkWhite)
@@ -226,16 +202,16 @@ struct GroupSelector: View {
                     FANTASYTheme.getColor(named: .groupSheetBlue)
                 }
                 VStack {
-                    ForEach(popularTeamPrediction.indices, id: \.self) { index in
+                    ForEach(viewModel.popularTeamPrediction.indices, id: \.self) { index in
                         HStack {
                             Text("\(index + 1)")
                                 .foregroundStyle(.cfsdkWhite)
                                 .font(.subheadline)
-                            Image(popularTeamPrediction[index].imageName)
+                            Image(viewModel.popularTeamPrediction[index].imageName)
                                 .resizable()
                                 .frame(width: 25, height: 25)
                                 .clipShape(Circle())
-                            Text(popularTeamPrediction[index].name)
+                            Text(viewModel.popularTeamPrediction[index].name)
                                 .foregroundStyle(.cfsdkWhite)
                             Spacer()
                         }
@@ -248,7 +224,7 @@ struct GroupSelector: View {
                     Divider()
                     HStack{
                         Button(action: {
-                            showScoreSheet.toggle()
+                            viewModel.showScoreSheet.toggle()
                         }, label: {
                             Text("See how to score points")
                                 .foregroundStyle(.cfsdkAccent1)
@@ -256,7 +232,7 @@ struct GroupSelector: View {
                         .padding()
                         Spacer()
                     }
-                    .sheet(isPresented: $showScoreSheet, content: {
+                    .sheet(isPresented: $viewModel.showScoreSheet, content: {
                         scorePointSheet
                             .presentationCornerRadius(20)
                             .presentationDetents([.fraction(0.65)])
@@ -266,81 +242,59 @@ struct GroupSelector: View {
                             }
                     })
                 }
-                
             }
         }
         .ignoresSafeArea()
     }
-    
+
     var scorePointSheet: some View {
         ZStack {
-            FANTASYTheme.getColor(named: .CFSDKPrimary3)
-            VStack {
+            FANTASYTheme.getColor(named: .groupSheetBlue)
+            VStack(alignment: .leading, spacing: 0) {
                 HStack {
-                    Text("How to Score Points")
-                        .font(.title3.bold())
+                    Text("See how to score points")
                         .foregroundStyle(.cfsdkWhite)
-                        .padding([.top, .leading], 20)
+                        .padding([.top, .leading], 10)
                     Spacer()
                     Button(action: {
-                        showScoreSheet = false
+                        viewModel.showScoreSheet = false
                     }, label: {
                         Image(systemName: "xmark")
                             .tint(.cfsdkWhite)
                             .padding([.top, .trailing], 10)
                     })
-                    
                 }
-                Divider()
-                    .background {
-                        Color.white.opacity(0.5)
-                    }
-                ForEach(scoreSheetDetail.indices, id: \.self) { index in
+                .background {
+                    FANTASYTheme.getColor(named: .groupSheetBlue)
+                }
+                ForEach(viewModel.scoreSheetDetail, id: \.self) { scoreSheet in
                     HStack {
-                        Text(scoreSheetDetail[index].name)
-                            .font(.title3.bold())
-                            .foregroundStyle(.cfsdkWhite)
-                            .padding([.top, .leading], 10)
-                        Spacer()
-                        Text(scoreSheetDetail[index].points)
-                            .font(.title3.bold())
-                            .foregroundStyle(scoreSheetDetail[index].points == "0 pts" ? .cfsdkAccentError: .cfsdkWhite)
-                            .padding([.top, .trailing], 10)
-                    }
-                    HStack{
-                        Text(scoreSheetDetail[index].description)
-                            .font(.subheadline)
-                            .foregroundStyle(.cfsdkWhite).opacity(0.7)
-                            .lineLimit(nil)
-                            .fixedSize(horizontal: false, vertical: true)
-                        Spacer()
-                    }
-                    .padding(.leading,10)
-                    Divider()
-                        .background {
-                            Color.white.opacity(0.5)
-                        }
-                }
-                
-                HStack{
-                    Button(action: {
-                        
-                    }, label: {
-                        Text("Read full article")
+                        Text(scoreSheet.name)
                             .foregroundStyle(.cfsdkAccent1)
-                    })
-                    .padding()
-                    Spacer()
+                            .padding(.top, 20)
+                            .padding(.horizontal, 10)
+                        Spacer()
+                    }
+                    HStack(alignment: .center, spacing: 0) {
+                        VStack(alignment: .leading) {
+                            Text(scoreSheet.description)
+                                .foregroundStyle(.cfsdkWhite)
+                                .font(.subheadline)
+                                .padding(.top, 20)
+                                .padding(.leading, 10)
+                                .padding(.bottom, 20)
+                                .padding(.trailing, 5)
+                        }
+                        Text(scoreSheet.points)
+                            .foregroundStyle(.cfsdkAccent1)
+                            .font(.subheadline)
+                            .padding(.horizontal, 10)
+                    }
                 }
+                Spacer()
             }
         }
         .ignoresSafeArea()
     }
 }
 
-
-//struct GroupSelector_Previews: PreviewProvider {
-//    static var previews: some View {
-//        GroupSelector(progress: $progress)
-//    }
-//}
