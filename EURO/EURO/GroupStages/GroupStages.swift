@@ -2,7 +2,7 @@
 //  GroupStages.swift
 //  EURO
 //
-//  Created by Shounak Jindam on 06/06/24.
+//  Created by Shounak Jindam on 06/06/24.@
 //
 
 import SwiftUI
@@ -36,9 +36,9 @@ struct GroupStages: View {
                     GroupSelector(groupName: $groupName[index], progress: $progress)
                         .CFSDKcornerRadius(15, corners: .allCorners)
                         .frame(height: 350)
-                        .padding()
+                        .padding(.all, 30)
                 }
-                ThirdPlaceView()
+                ThirdPlaceView(progress: $progress)
                     .padding()
             }
         }

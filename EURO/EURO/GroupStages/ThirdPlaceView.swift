@@ -13,6 +13,8 @@ struct ThirdPlaceView: View {
     
     @State private var showKnockoutSheet: Bool = false
     
+    @Binding var progress: Double
+    
     let teams = [
         ("Switzerland", "Group A", "ENG"),
         ("Finland", "Group B", "ESP"),
@@ -63,6 +65,7 @@ struct ThirdPlaceView: View {
             Text("Predict the four best third-placed teams")
                 .font(.title3)
                 .foregroundStyle(.cfsdkWhite)
+                .fixedSize(horizontal: true, vertical: false)
             Text("The four with the most points will progress to the knockout stage")
                 .font(.subheadline)
                 .foregroundStyle(.cfsdkWhite)
@@ -79,6 +82,11 @@ struct ThirdPlaceView: View {
                             selectedTeams.remove(team.0)
                         } else if selectedTeams.count < 4 {
                             selectedTeams.insert(team.0)
+                        }
+                        if progress < 1.0 {
+                            withAnimation {
+                                progress += 1/28
+                            }
                         }
                     }) {
                         Image(systemName: selectedTeams.contains(team.0) ? "circle.fill" : "circle")
@@ -112,7 +120,7 @@ struct ThirdPlaceView: View {
                 Text("Now Lets move on the Knockout Stage!")
                     .foregroundColor(.cfsdkWhite)
                 Button(action: {
-                    
+                    showKnockoutSheet = true
                 }, label: {
                     Text("Continue")
                         .foregroundStyle(.cfsdkNeutral)
@@ -126,9 +134,9 @@ struct ThirdPlaceView: View {
             }
         }
         .ignoresSafeArea()
+        .fullScreenCover(isPresented: $showKnockoutSheet, content: {
+            KnockoutStages()
+        })
     }
 }
 
-#Preview {
-    ThirdPlaceView()
-}
