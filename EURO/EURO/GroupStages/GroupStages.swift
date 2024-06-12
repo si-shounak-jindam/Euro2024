@@ -8,7 +8,11 @@
 import SwiftUI
 
 struct GroupStages: View {
-    @State private var progress: Double = 0.5
+    
+    @State private var progress: Double = 0
+    
+    @State private var groupName: [String] = ["A", "B", "C", "D", "E", "F"]
+    
     var body: some View {
         ZStack {
             FANTASYTheme.getColor(named: .CFSDKPrimary)
@@ -28,8 +32,8 @@ struct GroupStages: View {
     var groups: some View {
         ScrollView {
             VStack {
-                ForEach(0..<8) { index in
-                    GroupSelector()
+                ForEach(groupName.indices) { index in
+                    GroupSelector(groupName: $groupName[index], progress: $progress)
                         .CFSDKcornerRadius(15, corners: .allCorners)
                         .frame(height: 350)
                         .padding()
@@ -76,25 +80,6 @@ struct GroupStages: View {
             .scaledToFit()
             .padding(.horizontal, 40)
             .padding(.vertical, 10)
-    }
-}
-
-struct ProgressBar: View {
-    @Binding var progress: Double
-    
-    var body: some View {
-        ZStack(alignment: .leading) {
-            Rectangle()
-                .frame(height: 5)
-                .foregroundColor(Color.gray.opacity(0.3))
-                .cornerRadius(10)
-            
-            Rectangle()
-                .frame(width: CGFloat(progress) * UIScreen.main.bounds.width * 0.8, height: 5)
-                .foregroundColor(.cfsdkAccent1)
-                .cornerRadius(10)
-        }
-        .padding()
     }
 }
 

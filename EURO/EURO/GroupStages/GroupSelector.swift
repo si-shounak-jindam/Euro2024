@@ -7,21 +7,10 @@
 
 import SwiftUI
 
-struct Country: Identifiable, Equatable {
-    let id = UUID()
-    let name: String
-    let imageName: String
-    var isSelected = false
-}
-
-struct ScoreSheetModel: Identifiable, Equatable {
-    let id = UUID()
-    let name: String
-    let description: String
-    let points: String
-}
-
 struct GroupSelector: View {
+    
+    @Binding var groupName: String
+    @Binding var progress: Double
     
     @Environment(\.presentationMode) var presentationMode
     
@@ -93,7 +82,7 @@ struct GroupSelector: View {
     var headerView: some View {
         VStack(spacing: 0) {
             HStack {
-                Text("Group A")
+                Text("Group " + "\(groupName)")
                     .foregroundStyle(.cfsdkAccent1)
                 Spacer()
             }
@@ -104,6 +93,11 @@ struct GroupSelector: View {
                     VStack {
                         Button(action: {
                             addCountryIfNeeded(allTeams[index])
+                            if progress < 1.0 {
+                                withAnimation {
+                                    progress += 1/28
+                                }
+                            }
                         }, label: {
                             if allTeams[index].isSelected {
                                 Image(systemName: "circle.fill")
@@ -127,7 +121,7 @@ struct GroupSelector: View {
         HStack {
             VStack(spacing: 0) {
                 HStack {
-                    Text("Group A")
+                    Text("Group " + "\(groupName)")
                         .foregroundStyle(.cfsdkAccent1)
                     Spacer()
                 }
@@ -340,8 +334,8 @@ struct GroupSelector: View {
 }
 
 
-struct GroupSelector_Previews: PreviewProvider {
-    static var previews: some View {
-        GroupSelector()
-    }
-}
+//struct GroupSelector_Previews: PreviewProvider {
+//    static var previews: some View {
+//        GroupSelector(groupName: $groupName)
+//    }
+//}
